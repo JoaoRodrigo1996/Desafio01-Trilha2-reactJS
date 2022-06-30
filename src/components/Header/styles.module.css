@@ -1,0 +1,22 @@
+.header {
+  background: var(--gray-700);
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageLogo {
+  width: 22px;
+  height: 36px;
+  margin-right: 0.75rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--blue-light);
+}
+
+.titleColor {
+  color: var(--purple-dark);
+}
