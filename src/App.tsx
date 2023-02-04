@@ -2,11 +2,11 @@ import { Header } from "./components/Header";
 
 import styles from "./App.module.css";
 
-import "./styles/global.css";
 import { PlusCircle } from "phosphor-react";
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
 import { Empty } from "./components/Empty";
 import { Tasks } from "./components/Tasks";
-import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
+import "./styles/global.css";
 
 interface TaskProps {
   id: number;
@@ -14,7 +14,7 @@ interface TaskProps {
   isComplete: boolean;
 }
 
-function App({ id, title, isComplete }: TaskProps) {
+export function App() {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [newTaskText, setNewTaskText] = useState("");
   const [isCompleteCount, setIsCompleteCount] = useState(0);
@@ -36,13 +36,15 @@ function App({ id, title, isComplete }: TaskProps) {
     const checked = tasks.map((task) =>
       task.id === id ? { ...task, isComplete: !task.isComplete } : task
     );
-    setIsCompleteCount((prevState) => {
-      return prevState + 1;
-    });
+
+    const isTaskCompleted = checked.filter((task) => task.isComplete);
+
+    console.log(isTaskCompleted.length);
+
+    setIsCompleteCount(isTaskCompleted.length);
+
     setTasks(checked);
   }
-
-  console.log(isCompleteCount);
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
     setNewTaskText(event.target.value);
@@ -116,5 +118,3 @@ function App({ id, title, isComplete }: TaskProps) {
     </div>
   );
 }
-
-export default App;
